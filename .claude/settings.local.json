@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(jar tf *)",
+      "Bash(unzip -l target/ecommerce/WEB-INF/lib/jakarta.servlet.jsp.jstl-2.0.0.jar)",
+      "Bash(unzip -l target/ecommerce/WEB-INF/lib/jakarta.servlet.jsp.jstl-api-2.0.0.jar)",
+      "Bash(unzip -p target/ecommerce/WEB-INF/lib/jakarta.servlet.jsp.jstl-2.0.0.jar META-INF/c.tld)",
+      "Bash(jar xf *)",
+      "Bash(unzip -p target/ecommerce/WEB-INF/lib/jakarta.servlet.jsp.jstl-2.0.0.jar META-INF/permittedTaglibs.tld)",
+      "Bash(java *)",
+      "Bash(mvn compile *)",
+      "Bash(mvn clean *)",
+      "WebSearch",
+      "Bash(mvn dependency:resolve -DincludeArtifactIds=jakarta.servlet.jsp.jstl-api -DremoteRepositories=https://repo.maven.apache.org/maven2)",
+      "Bash(mvn dependency:tree -DremoteRepositories=https://repo.maven.apache.org/maven2)"
+    ]
+  }
+}
