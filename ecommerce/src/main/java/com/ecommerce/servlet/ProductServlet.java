@@ -66,7 +66,7 @@ public class ProductServlet extends HttpServlet {
         List<Category> categoryList = categoryDao.findAll();
 
         req.setAttribute("products", productList);
-        req.setAttribute("categoryList", categoryList);
+        req.setAttribute("categories", categoryList);
         req.setAttribute("page", page);
         req.setAttribute("totalPages", totalPages);
         req.setAttribute("totalCount", totalCount);

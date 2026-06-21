@@ -12,16 +12,6 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
-    <!-- 字符编码过滤器 -->
-    <filter>
-        <filter-name>EncodingFilter</filter-name>
-        <filter-class>com.ecommerce.util.EncodingFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>EncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
     <!-- Session超时配置（30分钟） -->
     <session-config>
         <session-timeout>30</session-timeout>

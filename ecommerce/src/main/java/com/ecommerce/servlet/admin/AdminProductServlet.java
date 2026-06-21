@@ -8,7 +8,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Properties;
 import java.util.UUID;
 
 @WebServlet("/admin/product")
@@ -148,7 +150,7 @@ public class AdminProductServlet extends HttpServlet {
         if (product != null && product.getImage() != null) {
             String imagePath = product.getImage(); // e.g. "images/xxx.jpg"
             String fileName = imagePath.substring(imagePath.lastIndexOf("/") + 1);
-            File imageFile = new File("D:/finalexam/Finalexam/ecommerce/src/main/webapp/images", fileName);
+            File imageFile = new File(getUploadDir(), fileName);
             if (imageFile.exists()) {
                 imageFile.delete();
             }
@@ -183,7 +185,7 @@ public class AdminProductServlet extends HttpServlet {
             String newFileName = UUID.randomUUID().toString() + ext;
 
             // 保存到外部目录，避免重新部署时丢失
-            String uploadPath = "D:/finalexam/Finalexam/ecommerce/src/main/webapp/images";
+            String uploadPath = getUploadDir();
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) {
                 uploadDir.mkdirs();
@@ -210,5 +212,20 @@ public class AdminProductServlet extends HttpServlet {
         }
 
         response.sendRedirect(request.getContextPath() + "/admin/product?action=list");
+    }
+
+    private String getUploadDir() {
+        String dir = "D:/ecommerce_uploads";
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("db.properties")) {
+            if (is != null) {
+                Properties props = new Properties();
+                props.load(is);
+                String configured = props.getProperty("upload.dir");
+                if (configured != null && !configured.trim().isEmpty()) {
+                    dir = configured.trim();
+                }
+            }
+        } catch (IOException ignored) {}
+        return dir;
     }
 }

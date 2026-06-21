@@ -38,6 +38,12 @@ public class CartServlet extends HttpServlet {
             req.setAttribute("cartItems", cartItems);
             req.setAttribute("total", total);
             req.getRequestDispatcher("/cart.jsp").forward(req, resp);
+        } else if ("delete".equals(action)) {
+            int id = Integer.parseInt(req.getParameter("id"));
+            cartDao.delete(id);
+            resp.sendRedirect(req.getContextPath() + "/cart");
+        } else {
+            resp.sendRedirect(req.getContextPath() + "/cart");
         }
     }
 
