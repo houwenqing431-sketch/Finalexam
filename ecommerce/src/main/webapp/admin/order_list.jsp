@@ -77,7 +77,7 @@
                                             <a href="${pageContext.request.contextPath}/admin/order?action=detail&id=${order.id}" class="btn btn-sm btn-outline-info">
                                                 <i class="bi bi-eye"></i> 详情
                                             </a>
-                                            <select class="form-select form-select-sm" style="width: auto;" onchange="if(this.value) location.href='${pageContext.request.contextPath}/admin/order?action=status&id=${order.id}&status='+this.value">
+                                            <select class="form-select form-select-sm" style="width: auto;" onchange="if(this.value && confirm('确定要修改订单状态吗？')) location.href='${pageContext.request.contextPath}/admin/order?action=status&id=${order.id}&status='+this.value; else this.value=''">
                                                 <option value="">修改状态</option>
                                                 <option value="0">待付款</option>
                                                 <option value="1">已付款</option>

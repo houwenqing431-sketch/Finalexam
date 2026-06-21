@@ -1,6 +1,7 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>`r`n<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -8,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${fn:escapeXml(product.name)} - 电商平台</title>
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -17,10 +19,10 @@
         <c:when test="${not empty product}">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/index.jsp">首页</a></li>
-                    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/product?action=list">商品列表</a></li>
-                    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/product?action=list&categoryId=${product.categoryId}">${fn:escapeXml(product.categoryName)}</a></li>
-                    <li class="breadcrumb-item active">${fn:escapeXml(product.name)}</li>
+                    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/index.jsp"><i class="bi bi-house-door me-1"></i>首页</a></li>
+                    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/product?action=list"><i class="bi bi-grid me-1"></i>商品列表</a></li>
+                    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/product?action=list&categoryId=${product.categoryId}"><i class="bi bi-tag me-1"></i>${fn:escapeXml(product.categoryName)}</a></li>
+                    <li class="breadcrumb-item active"><i class="bi bi-box me-1"></i>${fn:escapeXml(product.name)}</li>
                 </ol>
             </nav>
 

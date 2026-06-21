@@ -75,6 +75,15 @@ public class AdminUserServlet extends HttpServlet {
             throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         int status = Integer.parseInt(request.getParameter("status"));
+
+        // 防止管理员禁用自己
+        User currentUser = (User) request.getSession().getAttribute("user");
+        if (currentUser != null && currentUser.getId() == id) {
+            request.getSession().setAttribute("msg", "不能修改自己的账号状态");
+            response.sendRedirect(request.getContextPath() + "/admin/user?action=list");
+            return;
+        }
+
         UserDao userDao = new UserDao();
         userDao.updateStatus(id, status);
         response.sendRedirect(request.getContextPath() + "/admin/user?action=list");

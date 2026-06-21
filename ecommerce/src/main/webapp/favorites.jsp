@@ -1,5 +1,6 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>`r`n<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <c:if test="${sessionScope.user == null}">
     <c:redirect url="${pageContext.request.contextPath}/login"/>
@@ -34,7 +35,6 @@
                             </div>
                         </c:otherwise>
                     </c:choose>
-                    <button class="btn btn-sm btn-outline-danger position-absolute top-0 end-0 m-2" onclick="cancelFavorite(${fav.id})" title="取消收藏">&times;</button>
                     <div class="card-body d-flex flex-column">
                         <h6 class="card-title">${fav.productName}</h6>
                         <p class="card-text text-danger fw-bold mt-auto">
@@ -42,7 +42,7 @@
                         </p>
                         <div class="d-flex gap-2">
                             <a href="${pageContext.request.contextPath}/product?action=detail&id=${fav.productId}" class="btn btn-outline-primary btn-sm flex-grow-1">查看详情</a>
-                            <a href="${pageContext.request.contextPath}/favorite?action=delete&id=${fav.id}" class="btn btn-outline-danger btn-sm" onclick="return confirm('确定要取消收藏吗？')">取消</a>
+                            <a href="${pageContext.request.contextPath}/favorite?action=delete&id=${fav.id}" class="btn btn-outline-danger btn-sm" onclick="return confirm('确定要取消收藏吗?')">取消</a>
                         </div>
                     </div>
                 </div>

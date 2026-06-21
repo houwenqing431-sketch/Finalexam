@@ -119,15 +119,20 @@ public class CategoryDao {
     }
 
     public boolean existName(String name) {
+        return existNameExcluding(name, 0);
+    }
+
+    public boolean existNameExcluding(String name, int excludeId) {
         boolean exists = false;
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             conn = DBUtil.getConnection();
-            String sql = "SELECT COUNT(*) FROM t_category WHERE name = ?";
+            String sql = "SELECT COUNT(*) FROM t_category WHERE name = ? AND id != ?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, name);
+            ps.setInt(2, excludeId);
             rs = ps.executeQuery();
             if (rs.next() && rs.getInt(1) > 0) {
                 exists = true;

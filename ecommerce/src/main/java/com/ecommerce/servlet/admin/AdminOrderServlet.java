@@ -104,9 +104,44 @@ public class AdminOrderServlet extends HttpServlet {
     private void updateStatus(HttpServletRequest request, HttpServletResponse response)
             throws IOException, SQLException {
         int id = Integer.parseInt(request.getParameter("id"));
-        int status = Integer.parseInt(request.getParameter("status"));
+        int newStatus = Integer.parseInt(request.getParameter("status"));
+
         OrderDao orderDao = new OrderDao();
-        orderDao.updateStatus(id, status);
+        Order order = orderDao.findById(id);
+
+        if (order == null) {
+            request.getSession().setAttribute("msg", "订单不存在");
+            response.sendRedirect(request.getContextPath() + "/admin/order?action=list");
+            return;
+        }
+
+        int oldStatus = order.getStatus();
+
+        // 合法状态流转规则
+        boolean valid = false;
+        switch (oldStatus) {
+            case 0: // 待付款 → 已付款 / 已取消
+                valid = (newStatus == 1 || newStatus == 4);
+                break;
+            case 1: // 已付款 → 已发货 / 已取消
+                valid = (newStatus == 2 || newStatus == 4);
+                break;
+            case 2: // 已发货 → 已完成
+                valid = (newStatus == 3);
+                break;
+            case 3: // 已完成 → 不可变更
+            case 4: // 已取消 → 不可变更
+                valid = false;
+                break;
+        }
+
+        if (!valid) {
+            request.getSession().setAttribute("msg", "非法的状态变更操作");
+            response.sendRedirect(request.getContextPath() + "/admin/order?action=list");
+            return;
+        }
+
+        orderDao.updateStatus(id, newStatus);
         response.sendRedirect(request.getContextPath() + "/admin/order?action=list");
     }
 }

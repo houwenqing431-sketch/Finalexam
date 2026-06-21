@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <c:if test="${sessionScope.user == null || sessionScope.user.role != 1}">
     <c:redirect url="${pageContext.request.contextPath}/login.jsp"/>
 </c:if>
@@ -82,3 +83,10 @@
 
         <!-- 主内容区域 -->
         <div class="p-4 flex-grow-1 bg-light bg-opacity-25">
+        <c:if test="${not empty sessionScope.msg}">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle me-2"></i>${sessionScope.msg}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <c:remove var="msg" scope="session"/>
+        </c:if>

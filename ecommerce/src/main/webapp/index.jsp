@@ -1,6 +1,7 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>`r`n<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <%@ page import="com.ecommerce.dao.ProductDao" %>
 <%@ page import="com.ecommerce.dao.CategoryDao" %>
 <%@ page import="com.ecommerce.bean.Category" %>
@@ -42,21 +43,21 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="https://picsum.photos/1200/400?random=1" class="d-block w-100" alt="Banner 1" style="height:400px;object-fit:cover;">
+            <img src="https://picsum.photos/id/1015/1200/400" class="d-block w-100" alt="Banner 1" style="height:400px;object-fit:cover;">
             <div class="carousel-caption d-none d-md-block">
                 <h5>欢迎来到电商平台</h5>
                 <p>海量商品，优质低价</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="https://picsum.photos/1200/400?random=2" class="d-block w-100" alt="Banner 2" style="height:400px;object-fit:cover;">
+            <img src="https://picsum.photos/id/1043/1200/400" class="d-block w-100" alt="Banner 2" style="height:400px;object-fit:cover;">
             <div class="carousel-caption d-none d-md-block">
                 <h5>新品上市</h5>
                 <p>最新潮流商品等你发现</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="https://picsum.photos/1200/400?random=3" class="d-block w-100" alt="Banner 3" style="height:400px;object-fit:cover;">
+            <img src="https://picsum.photos/id/106/1200/400" class="d-block w-100" alt="Banner 3" style="height:400px;object-fit:cover;">
             <div class="carousel-caption d-none d-md-block">
                 <h5>限时特惠</h5>
                 <p>超值好物不容错过</p>

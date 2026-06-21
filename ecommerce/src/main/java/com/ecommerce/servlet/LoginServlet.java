@@ -2,7 +2,7 @@ package com.ecommerce.servlet;
 
 import com.ecommerce.bean.User;
 import com.ecommerce.dao.UserDao;
-import com.ecommerce.util.PasswordUtil;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
             return;
         }
-        if (!PasswordUtil.verify(password, user.getPassword())) {
+        if (!password.equals(user.getPassword())) {
             req.setAttribute("msg", "密码错误");
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
             return;

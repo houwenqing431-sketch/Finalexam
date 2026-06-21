@@ -2,7 +2,7 @@ package com.ecommerce.servlet;
 
 import com.ecommerce.bean.User;
 import com.ecommerce.dao.UserDao;
-import com.ecommerce.util.PasswordUtil;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -91,7 +91,7 @@ public class RegisterServlet extends HttpServlet {
 
         User user = new User();
         user.setUsername(username);
-        user.setPassword(PasswordUtil.hash(password));
+        user.setPassword(password);
         user.setRealName(realName);
         user.setEmail(email);
         user.setPhone(phone);

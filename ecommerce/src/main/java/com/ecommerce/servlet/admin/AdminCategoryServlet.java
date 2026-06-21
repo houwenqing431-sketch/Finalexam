@@ -91,18 +91,24 @@ public class AdminCategoryServlet extends HttpServlet {
 
         CategoryDao categoryDao = new CategoryDao();
 
-        if (categoryDao.existName(name)) {
-            response.sendRedirect(request.getContextPath() + "/admin/category?action=list");
-            return;
-        }
-
         if (id > 0) {
+            // 编辑：排除自身ID检查重名
+            if (categoryDao.existNameExcluding(name, id)) {
+                request.getSession().setAttribute("msg", "分类名称已存在");
+                response.sendRedirect(request.getContextPath() + "/admin/category?action=list");
+                return;
+            }
             Category category = new Category();
             category.setId(id);
             category.setName(name);
             category.setDescription(description);
             categoryDao.update(category);
         } else {
+            if (categoryDao.existName(name)) {
+                request.getSession().setAttribute("msg", "分类名称已存在");
+                response.sendRedirect(request.getContextPath() + "/admin/category?action=list");
+                return;
+            }
             categoryDao.add(name, description);
         }
 

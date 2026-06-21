@@ -142,6 +142,18 @@ public class AdminProductServlet extends HttpServlet {
             throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         ProductDao productDao = new ProductDao();
+
+        // 删除商品图片文件
+        Product product = productDao.findById(id);
+        if (product != null && product.getImage() != null) {
+            String imagePath = product.getImage(); // e.g. "images/xxx.jpg"
+            String fileName = imagePath.substring(imagePath.lastIndexOf("/") + 1);
+            File imageFile = new File("D:/finalexam/Finalexam/ecommerce/src/main/webapp/images", fileName);
+            if (imageFile.exists()) {
+                imageFile.delete();
+            }
+        }
+
         productDao.delete(id);
         response.sendRedirect(request.getContextPath() + "/admin/product?action=list");
     }
@@ -170,8 +182,8 @@ public class AdminProductServlet extends HttpServlet {
             String ext = fileName.substring(fileName.lastIndexOf("."));
             String newFileName = UUID.randomUUID().toString() + ext;
 
-            // 保存到 webapp/images/ 目录
-            String uploadPath = request.getServletContext().getRealPath("/images");
+            // 保存到外部目录，避免重新部署时丢失
+            String uploadPath = "D:/finalexam/Finalexam/ecommerce/src/main/webapp/images";
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) {
                 uploadDir.mkdirs();

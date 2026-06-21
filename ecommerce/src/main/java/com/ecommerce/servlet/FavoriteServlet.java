@@ -26,8 +26,13 @@ public class FavoriteServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/login.jsp");
             return;
         }
+        String action = req.getParameter("action");
         try {
-            handleList(req, resp, user);
+            if ("delete".equals(action)) {
+                handleDelete(req, resp);
+            } else {
+                handleList(req, resp, user);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

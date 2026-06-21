@@ -113,13 +113,13 @@ CREATE TABLE IF NOT EXISTS t_favorite (
 -- 插入初始数据
 -- ==========================================
 
--- 管理员账号（密码：admin123，实际存储需加密，此处为示例）
-INSERT INTO t_user (username, password, real_name, role, status) 
-VALUES ('admin', '-- use PasswordUtil.hash to generate --', '系统管理员', 1, 1);
+-- 管理员账号（密码：admin123）
+INSERT INTO t_user (username, password, real_name, role, status)
+VALUES ('admin', 'admin123', '系统管理员', 1, 1);
 
 -- 测试用户
-INSERT INTO t_user (username, password, real_name, email, phone, address, role, status) 
-VALUES ('zhangsan', '-- use PasswordUtil.hash to generate --', '张三', 'zhangsan@example.com', '13800001111', '北京市朝阳区', 0, 1),
+INSERT INTO t_user (username, password, real_name, email, phone, address, role, status)
+VALUES ('zhangsan', '123456', '张三', 'zhangsan@example.com', '13800001111', '北京市朝阳区', 0, 1),
        ('lisi', '123456', '李四', 'lisi@example.com', '13800002222', '上海市浦东新区', 0, 1);
 
 -- 商品分类

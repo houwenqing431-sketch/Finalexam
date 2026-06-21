@@ -35,7 +35,7 @@
                                     <form method="get" action="${pageContext.request.contextPath}/admin/order" class="d-flex gap-2 align-items-center">
                                         <input type="hidden" name="action" value="status">
                                         <input type="hidden" name="id" value="${order.id}">
-                                        <select name="status" class="form-select form-select-sm" style="width: auto;" onchange="this.form.submit()">
+                                        <select name="status" class="form-select form-select-sm" style="width: auto;" onchange="if(confirm('确定要修改订单状态吗？')) this.form.submit()">
                                             <option value="0" ${order.status == 0 ? 'selected' : ''}>待付款</option>
                                             <option value="1" ${order.status == 1 ? 'selected' : ''}>已付款</option>
                                             <option value="2" ${order.status == 2 ? 'selected' : ''}>已发货</option>

@@ -2,7 +2,7 @@ package com.ecommerce.servlet;
 
 import com.ecommerce.bean.User;
 import com.ecommerce.dao.UserDao;
-import com.ecommerce.util.PasswordUtil;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -77,7 +77,7 @@ public class UserServlet extends HttpServlet {
         String newPassword = req.getParameter("newPassword");
         String confirmPassword = req.getParameter("confirmPassword");
 
-        if (!PasswordUtil.verify(oldPassword, user.getPassword())) {
+        if (!oldPassword.equals(user.getPassword())) {
             req.setAttribute("msgType", "danger");
             req.setAttribute("msg", "旧密码错误");
             req.getRequestDispatcher("/user_center.jsp").forward(req, resp);
@@ -90,8 +90,8 @@ public class UserServlet extends HttpServlet {
             return;
         }
 
-        userDao.changePassword(user.getId(), PasswordUtil.hash(newPassword));
-        user.setPassword(PasswordUtil.hash(newPassword));
+        userDao.changePassword(user.getId(), newPassword);
+        user.setPassword(newPassword);
         req.getSession().setAttribute("user", user);
 
         req.setAttribute("msgType", "success");
